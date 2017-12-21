@@ -86,10 +86,10 @@ def main():
         print(tempssup(alambda, mu))
 
     uia = input("Rerun ? Y/n")
-    if uia != 'n' or uia != 'N':
-        main()
-    else:
+    if uia == 'n' or uia == 'N':
         exit(0)
+    else:
+        main()
 
 
 if __name__ == '__main__':
