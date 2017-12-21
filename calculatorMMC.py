@@ -56,8 +56,13 @@ def probazero(alambda, mu, c):
 
 
 def assezguichet(alambda, mu, c):
-    res = alambda / (mu * c)
-    return res < 1
+    c = 0
+    res = 2
+    while res > 1:
+        c += 1
+        res = alambda / (mu * c)
+    return c, res
+
 
 
 def tempsattentsup(alambda, mu, c):
@@ -98,7 +103,8 @@ def main():
     elif choix == 6:
         print(probazero(alambda, mu, c))
     elif choix == 7:
-        print(assezguichet(alambda, mu, c))
+        res = assezguichet(alambda, mu)
+        print("Nombre guichet : {} resultat : {}".format(res[0], res[1]))
     elif choix == 8:
         print(tempsattentsup(alambda, mu, c))
 
