@@ -1,9 +1,11 @@
+# coding=utf-8
 # Calcul de files d'attentes pour un modele M/M/C
+import math
 
 
 def tempsmoyensysteme(alambda, mu, c):
     tq = tempsmoyenattente(alambda, mu, c)
-    res = tq+(1/mu)
+    res = tq + (1 / mu)
     return res
 
 
@@ -58,6 +60,14 @@ def assezguichet(alambda, mu, c):
     return res < 1
 
 
+def tempsattentsup(alambda, mu, c):
+    khi = alambda / mu
+    p0 = probazero(alambda, mu, c)
+    T = float(input("Valeur de T : "))
+    res = ((math.exp(-c * mu * (1 - (khi / c)) * T)) * p0 * (khi ** c)) / ((fact(c)) * (1 - (khi / c)))
+    return res
+
+
 def fact(n):
     if n < 2:
         return 1
@@ -73,7 +83,7 @@ def main():
     choix = int(
         input("Quelle opération ?\n1 : Temps moyen dans le système\n2 : Nombre moyen dans le système\n3 : Temps "
               "moyen d'attente dans la file\n4 : Nombvre moyen dans la file\n5 : Probabilite qu'il y ait n unité "
-              "dans le système\n6 : P0\n7 : Assez de file pour pas d'engorgement?\nChoix : "))
+              "dans le système\n6 : P0\n7 : Assez de file pour pas d'engorgement?\n8 : Temps supérieure a : Choix : "))
 
     if choix == 1:
         print(tempsmoyensysteme(alambda, mu, c))
@@ -89,6 +99,8 @@ def main():
         print(probazero(alambda, mu, c))
     elif choix == 7:
         print(assezguichet(alambda, mu, c))
+    elif choix == 8:
+        print(tempsattentsup(alambda, mu, c))
 
     uia = input("Rerun ? Y/n")
     if uia == 'n' or uia == 'N':
